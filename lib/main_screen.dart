@@ -21,7 +21,10 @@ class _CalculadoraState extends State<Calculadora> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Calculadora"),),
+      appBar: AppBar(title: Text("Calculadora"),
+          actions:[
+            IconButton(icon: Icon(Icons.delete),onPressed: () => clearAllFields(),)
+          ]),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(15.0),
@@ -38,6 +41,7 @@ class _CalculadoraState extends State<Calculadora> {
                   ],
                   decoration: InputDecoration(
                       prefix: Text('R\$ '),
+                      suffixIcon: IconButton(icon: Icon(Icons.cancel),onPressed: () => clearField(cost),),
                       border: OutlineInputBorder(),
                       labelText: 'Custo'
                   ),
@@ -54,6 +58,7 @@ class _CalculadoraState extends State<Calculadora> {
                   ],
                   decoration: InputDecoration(
                     suffix: Text(' %'),
+                      suffixIcon: IconButton(icon: Icon(Icons.cancel),onPressed: () => clearField(fee),),
                       border: OutlineInputBorder(),
                       labelText: 'Impostos'
                   ),
@@ -70,6 +75,7 @@ class _CalculadoraState extends State<Calculadora> {
                   ],
                   decoration: InputDecoration(
                       suffix: Text(' %'),
+                      suffixIcon: IconButton(icon: Icon(Icons.cancel),onPressed: () => clearField(discount),),
                       border: OutlineInputBorder(),
                       labelText: 'Desc. Fin'
                   ),
@@ -91,6 +97,7 @@ class _CalculadoraState extends State<Calculadora> {
                     DecimalInputFormatter()
                   ],
                   decoration: InputDecoration(
+                      suffixIcon: IconButton(icon: Icon(Icons.cancel),onPressed: () => clearField(price),),
                       border: OutlineInputBorder(),
                       prefix: Text('R\$ '),
                       labelText: 'Preço'
@@ -112,6 +119,7 @@ class _CalculadoraState extends State<Calculadora> {
                 ],
                 decoration: InputDecoration(
                     suffix: Text(' %'),
+                    suffixIcon: IconButton(icon: Icon(Icons.cancel),onPressed: () => clearField(margin),),
                     border: OutlineInputBorder(),
                     labelText: 'Margem'
                 ),
@@ -159,6 +167,18 @@ class _CalculadoraState extends State<Calculadora> {
     setState(() {
       price.text = parseString(result);
     });
+  }
+
+  void clearAllFields(){
+    cost.text = '';
+    fee.text = '';
+    discount.text = '';
+    price.text = '';
+    margin.text = '';
+  }
+
+  void clearField(TextEditingController controller){
+    controller.text = '';
   }
 
   double parseDouble (String str){
