@@ -146,8 +146,8 @@ class _CalculadoraState extends State<Calculadora> {
   void calcMargin(){
     double _price = parseDouble(price.text);
     double _cost = parseDouble(cost.text);
-    double _fee = parseDouble(fee.text);
-    double _discount = parseDouble(discount.text);
+    double _fee = parseDouble(fee.text)/100;
+    double _discount = parseDouble(discount.text)/100;
 
     double result = (((_price - _cost)/_price) - (_fee + _discount)) * 100;
 
